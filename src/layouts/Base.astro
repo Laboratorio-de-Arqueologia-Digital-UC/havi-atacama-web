@@ -27,6 +27,7 @@ const rutaOtro = ruta(otro, equivalente ?? (paginas.find((p) => p.clave === actu
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {import.meta.env.NO_INDEXAR === 'true' && <meta name="robots" content="noindex, nofollow" />}
     <title>{tituloCompleto}</title>
     {descripcion && <meta name="description" content={descripcion} />}
     <meta property="og:title" content={tituloCompleto} />

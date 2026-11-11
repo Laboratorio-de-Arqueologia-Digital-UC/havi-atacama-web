@@ -9,6 +9,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,11 +23,44 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+
+      # Versión para el servidor de CENIA (raíz del dominio).
       - name: Compilar (valida todos los campos del contenido)
         run: npm run build
-      - name: Guardar el sitio compilado
+      - name: Guardar el sitio compilado para CENIA
         uses: actions/upload-artifact@v4
         with:
           name: sitio-havi-atacama
           path: dist/
           retention-days: 30
+
+      # Prototipo en GitHub Pages (subcarpeta /havi-atacama-web/, sin indexar).
+      - name: Compilar prototipo para GitHub Pages
+        if: github.event_name != 'pull_request'
+        env:
+          SITE_URL: https://laboratorio-de-arqueologia-digital-uc.github.io
+          BASE_PATH: /havi-atacama-web/
+          NO_INDEXAR: 'true'
+        run: |
+          rm -rf dist
+          npm run build
+      - name: Preparar prototipo para GitHub Pages
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/
+
+  prototipo:
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.publicar.outputs.page_url }}
+    steps:
+      - name: Publicar en GitHub Pages
+        id: publicar
+        uses: actions/deploy-pages@v4
