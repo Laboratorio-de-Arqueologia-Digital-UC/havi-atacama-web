@@ -1,0 +1,12 @@
+titulo_es: Recursos y ciencia abierta
+titulo_en: Resources and open science
+bajada_es: Datos, código, publicaciones y materiales del proyecto, a medida que se publiquen.
+bajada_en: Project data, code, publications and materials, as they are released.
+cuerpo_es: |
+  El proyecto trabaja con registros digitales existentes, protegidos por la Ley 17.288 de Monumentos Nacionales, y no interviene materiales físicos.
+
+  El código, los modelos y los protocolos se publicarán con licencias abiertas, y los datos se depositarán en Zenodo con identificadores permanentes (DOI). El acceso será escalonado según la sensibilidad de cada sitio, siguiendo los principios FAIR y CARE. Los resultados se compartirán con el Museo Universidad de Tarapacá y con las comunidades de Arica y Parinacota.
+cuerpo_en: |
+  The project works with existing digital records, protected under Chile’s National Monuments Law 17,288, and does not intervene physical materials.
+
+  Code, models and protocols will be released under open licences, and data will be deposited on Zenodo with persistent identifiers (DOIs). Access will be tiered according to the sensitivity of each site, following the FAIR and CARE principles. Results will be shared with the Museo Universidad de Tarapacá and with communities in the Arica and Parinacota region.

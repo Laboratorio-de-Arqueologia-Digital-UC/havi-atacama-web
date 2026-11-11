@@ -1,0 +1,240 @@
+---
+import '../styles/global.css';
+import { getEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import { paginas, ruta, t, type Idioma } from '../lib/i18n';
+
+interface Props {
+  lang: Idioma;
+  titulo: string;
+  descripcion?: string;
+  actual: string; // clave de la página en el menú
+  /** Ruta equivalente en el otro idioma, sin el prefijo de idioma (p. ej. "avances/mi-noticia"). */
+  equivalente?: string;
+}
+
+const { lang, titulo, descripcion = '', actual, equivalente } = Astro.props;
+const otro: Idioma = lang === 'es' ? 'en' : 'es';
+const sitio = (await getEntry('sitio', 'sitio'))!.data;
+const logos = import.meta.glob<{ default: ImageMetadata }>('../assets/logos/*', { eager: true });
+const logo = (archivo: string) => logos[`../assets/logos/${archivo}`]?.default;
+const tituloCompleto = actual === 'inicio' ? `${sitio.nombre}` : `${titulo} · ${sitio.nombre}`;
+const rutaOtro = ruta(otro, equivalente ?? (paginas.find((p) => p.clave === actual)?.ruta ?? ''));
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{tituloCompleto}</title>
+    {descripcion && <meta name="description" content={descripcion} />}
+    <meta property="og:title" content={tituloCompleto} />
+    {descripcion && <meta property="og:description" content={descripcion} />}
+    <meta property="og:type" content="website" />
+    <link rel="alternate" hreflang={otro} href={rutaOtro} />
+    <link rel="icon" href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/favicon.svg`} type="image/svg+xml" />
+    <meta name="theme-color" content="#ede8e5" />
+  </head>
+  <body>
+    <a class="saltar" href="#contenido">{t(lang, 'saltar')}</a>
+    <header class="cabecera envoltura">
+      <a class="marca" href={ruta(lang)}>Motifs Across Media</a>
+      <nav class="nav-ancha" aria-label={t(lang, 'principal')}>
+        <ul>
+          {
+            paginas
+              .filter((p) => p.clave !== 'inicio')
+              .map((p) => (
+                <li>
+                  <a href={ruta(lang, p.ruta)} aria-current={p.clave === actual ? 'page' : undefined}>
+                    {p[lang]}
+                  </a>
+                </li>
+              ))
+          }
+        </ul>
+      </nav>
+      <a class="idioma" href={rutaOtro} hreflang={otro} lang={otro}>
+        <span class="visually-hidden">{t(lang, 'idioma')}: </span>{t(lang, 'otroIdioma')}
+      </a>
+      <details class="nav-movil">
+        <summary>{t(lang, 'menu')}</summary>
+        <nav aria-label={t(lang, 'principal')}>
+          <ul>
+            {
+              paginas.map((p) => (
+                <li>
+                  <a href={ruta(lang, p.ruta)} aria-current={p.clave === actual ? 'page' : undefined}>
+                    {p[lang]}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </details>
+    </header>
+
+    <main id="contenido">
+      <slot />
+    </main>
+
+    <footer class="pie-sitio">
+      <div class="envoltura">
+        <ul class="logos" role="list">
+          {
+            sitio.instituciones.map((i) => {
+              const img = logo(i.logo);
+              return (
+                <li>
+                  <a href={i.url} rel="noopener">
+                    {img ? (
+                      <Image src={img} alt={i.nombre} height={56} densities={[1, 2]} />
+                    ) : (
+                      i.nombre
+                    )}
+                  </a>
+                </li>
+              );
+            })
+          }
+        </ul>
+      </div>
+      <div class="envoltura pie-texto">
+        <p>{lang === 'es' ? sitio.financiamiento_es : sitio.financiamiento_en}</p>
+        <p>
+          {t(lang, 'contacto')}: <a href={`mailto:${sitio.correo}`}>{sitio.correo}</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+</style>
+
+<style>
+  .cabecera {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 12px 28px;
+    padding-block: 26px;
+    font-family: var(--sans);
+  }
+  .marca {
+    font-weight: 800;
+    font-size: 1.125rem;
+    letter-spacing: -0.01em;
+    color: var(--hollin);
+    text-decoration: none;
+    margin-right: auto;
+  }
+  .nav-ancha ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 22px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+  .nav-ancha a,
+  .nav-movil a {
+    color: var(--hollin);
+    text-decoration: none;
+    padding-block: 4px;
+  }
+  .nav-ancha a:hover,
+  .nav-movil a:hover {
+    color: var(--magenta);
+  }
+  .nav-ancha a[aria-current='page'],
+  .nav-movil a[aria-current='page'] {
+    color: var(--magenta);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 6px;
+  }
+  .idioma {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--azul);
+  }
+  .nav-movil {
+    display: none;
+    width: 100%;
+  }
+  .nav-movil summary {
+    cursor: pointer;
+    font-weight: 700;
+    padding: 10px 0;
+    min-height: 44px;
+  }
+  .nav-movil ul {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 8px;
+    display: grid;
+    gap: 2px;
+  }
+  .nav-movil a {
+    display: block;
+    padding: 10px 0;
+    font-size: 1.05rem;
+  }
+  @media (max-width: 960px) {
+    .nav-ancha {
+      display: none;
+    }
+    .nav-movil {
+      display: block;
+      order: 3;
+    }
+  }
+
+  .pie-sitio {
+    margin-top: 0;
+    background: var(--blanco);
+    border-top: 1px solid var(--linea);
+    padding-block: 48px 56px;
+    font-family: var(--sans);
+    font-size: 0.875rem;
+    color: var(--gris);
+  }
+  .logos {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 28px 48px;
+    list-style: none;
+    margin: 0 0 36px;
+    padding: 0;
+  }
+  .logos img {
+    height: 48px;
+    width: auto;
+  }
+  .logos a {
+    display: block;
+  }
+  .pie-texto {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 64px;
+  }
+  .pie-texto p {
+    margin: 0;
+    max-width: 70ch;
+  }
+</style>

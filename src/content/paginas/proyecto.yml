@@ -1,0 +1,43 @@
+titulo_es: El proyecto
+titulo_en: The project
+bajada_es: ¿Qué revelan los parecidos visuales entre soportes sobre la interacción, el intercambio y la identidad en el desierto de Atacama?
+bajada_en: What do visual similarities across media reveal about interaction, exchange and identity in the Atacama Desert?
+cuerpo_es: |
+  En el desierto de Atacama, la extrema aridez ha conservado un registro arqueológico excepcional del Período Intermedio Tardío (ca. 1000–1400 d.C.). En la cerámica, los geoglifos y el arte rupestre de los valles de Lluta, Azapa y Camarones aparecen motivos sorprendentemente parecidos: figuras de animales, personas y diseños geométricos.
+
+  ¿Reflejan un paisaje ontológico compartido, siglos de convivencia, continuidades en las creencias o nuevas redes de contacto y movilidad? Responderlo es clave para entender el intercambio, la interacción y la identidad regional en el Atacama prehispánico.
+
+  El desafío es de escala. Miles de objetos y sitios, dispersos en un territorio enorme, hacen imposible una comparación sistemática con los métodos tradicionales. Un arqueólogo puede ver que un motivo de geoglifo se parece a uno cerámico, pero no puede medir ese parecido en miles de piezas ni saber si es significativo o casual.
+
+  ## Dos preguntas
+
+  **Desde las humanidades:** ¿qué revelan las convergencias y divergencias visuales entre soportes sobre la interacción social, el intercambio y la formación de identidades en el Intermedio Tardío?
+
+  **Desde la inteligencia artificial:** ¿cómo desarrollar métodos de aprendizaje de representaciones, interpretables, que midan la similitud visual entre soportes arqueológicos heterogéneos, con poca supervisión y con explicaciones que los expertos puedan evaluar?
+
+  ## Qué quedará
+
+  Un corpus abierto de motivos anotados en cerámica, geoglifos y arte rupestre, el primero para el Atacama. Herramientas abiertas para medir similitud entre motivos, con modelos, protocolos de anotación y marcos de evaluación. Y nuevas interpretaciones arqueológicas sobre cómo se transmitieron y transformaron los motivos, basadas en evidencia sistemática.
+cuerpo_en: |
+  In Chile’s Atacama Desert, extreme aridity has preserved an exceptional archaeological record from the Late Intermediate Period (ca. AD 1000–1400). Across ceramics, geoglyphs and rock art from the Lluta, Azapa and Camarones valleys, strikingly similar motifs appear: anthropomorphic and zoomorphic figures and geometric designs.
+
+  Do these similarities reflect a shared ontological landscape, centuries of coexistence, continuities in belief systems, or emerging patterns of contact and mobility? Answering this is key to understanding exchange, interaction and regional identity in the prehispanic Atacama.
+
+  The challenge is one of scale. Thousands of objects and sites spread across a vast landscape make systematic comparison intractable with traditional methods. An archaeologist can see that a geoglyph motif resembles a ceramic one, but cannot measure that resemblance across thousands of items or tell whether it is meaningful or coincidental.
+
+  ## Two questions
+
+  **Humanities:** what do patterns of visual convergence and divergence across media reveal about social interaction, exchange and identity formation in the Late Intermediate Period?
+
+  **Artificial intelligence:** how can we develop interpretable representation learning methods that reliably measure visual similarity across heterogeneous archaeological media, operate under sparse supervision, and produce explanations experts can meaningfully evaluate?
+
+  ## What will remain
+
+  An open corpus of annotated motifs across ceramics, geoglyphs and rock art, the first for the Atacama. Open tools for motif similarity analysis, including trained models, annotation protocols and evaluation frameworks. And new archaeological interpretations of motif transmission and transformation, grounded in systematic evidence.
+figuras:
+- imagen: ../../assets/media/rupestre_panel2.jpg
+  alt_es: Panel de arte rupestre con camélidos y figuras circulares pintadas en rojo
+  alt_en: Rock art panel with camelids and circular figures painted in red
+  pie_es: Panel pintado con camélidos y figuras circulares.
+  pie_en: Painted panel with camelids and circular figures.
+  credito: Adrián Oyaneder (UTA)

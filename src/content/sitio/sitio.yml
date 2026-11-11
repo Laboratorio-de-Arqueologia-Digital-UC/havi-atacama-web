@@ -1,0 +1,20 @@
+nombre: Motifs Across Media
+correo: victor.mendez@uc.cl
+financiamiento_es: Proyecto financiado por Schmidt Sciences a través del programa Humanities and AI Virtual Institute (HAVI).
+financiamiento_en: Funded by Schmidt Sciences through the Humanities and AI Virtual Institute (HAVI) program.
+instituciones:
+  - nombre: Centro Nacional de Inteligencia Artificial (CENIA)
+    url: https://cenia.cl/
+    logo: logo_cenia.png
+  - nombre: Universidad de Tarapacá
+    url: https://www.uta.cl/
+    logo: logo_uta.png
+  - nombre: Pontificia Universidad Católica de Chile
+    url: https://www.uc.cl/
+    logo: logo_uc.svg
+  - nombre: Universidad de Chile
+    url: https://uchile.cl/
+    logo: logo_uchile.jpg
+  - nombre: Schmidt Sciences
+    url: https://www.schmidtsciences.org/
+    logo: logo_schmidt.svg

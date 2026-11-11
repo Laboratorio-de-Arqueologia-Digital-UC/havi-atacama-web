@@ -1,0 +1,55 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import Figura from '../../../components/Figura.astro';
+import Incrustacion from '../../../components/Incrustacion.astro';
+import { campo, fecha, idiomas, ruta, t, type Idioma } from '../../../lib/i18n';
+import { md } from '../../../lib/markdown';
+
+export async function getStaticPaths() {
+  const avances = await getCollection('avances', (a) => !a.data.borrador);
+  return idiomas.flatMap((lang) => avances.map((a) => ({ params: { lang, slug: a.id }, props: { avance: a } })));
+}
+const lang = Astro.params.lang as Idioma;
+const { avance } = Astro.props;
+const d = avance.data;
+const cuerpo = md(campo(d, 'cuerpo', lang));
+---
+
+<Base lang={lang} titulo={campo(d, 'titulo', lang)} descripcion={campo(d, 'resumen', lang)} actual="avances" equivalente={`avances/${avance.id}`}>
+  <article class="envoltura nota">
+    <p class="sans secundario num fecha"><time datetime={d.fecha.toISOString().slice(0, 10)}>{fecha(d.fecha, lang)}</time></p>
+    <h1>{campo(d, 'titulo', lang)}</h1>
+    <p class="bajada resumen">{campo(d, 'resumen', lang)}</p>
+    {d.imagen && <Figura src={d.imagen} alt={campo(d, 'imagen_alt', lang)} credito={d.credito} anchos="(max-width: 900px) 100vw, 900px" clase="imagen" eager />}
+    {cuerpo && <div class="prosa" set:html={cuerpo} />}
+    {d.incrustaciones.map((i) => <Incrustacion lang={lang} tipo={i.tipo} url={i.url} titulo={campo(i, 'titulo', lang)} />)}
+    <p class="sans volver"><a href={ruta(lang, 'avances')}>{t(lang, 'volver')}</a></p>
+  </article>
+</Base>
+
+<style>
+  .nota {
+    max-width: calc(900px + 2 * var(--margen));
+    padding-top: 32px;
+    padding-bottom: clamp(56px, 8vw, 96px);
+  }
+  .fecha {
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+  }
+  h1 {
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    margin-bottom: 20px;
+  }
+  .resumen {
+    max-width: 60ch;
+  }
+  .nota :global(.imagen) {
+    margin: 36px 0;
+  }
+  .volver {
+    margin-top: 48px;
+    font-weight: 600;
+  }
+</style>

@@ -1,0 +1,29 @@
+name: Compilar sitio
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Compilar (valida todos los campos del contenido)
+        run: npm run build
+      - name: Guardar el sitio compilado
+        uses: actions/upload-artifact@v4
+        with:
+          name: sitio-havi-atacama
+          path: dist/
+          retention-days: 30

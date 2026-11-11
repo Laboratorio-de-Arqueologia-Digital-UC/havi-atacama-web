@@ -1,0 +1,20 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import Encabezado from '../../../components/Encabezado.astro';
+import ListaAvances from '../../../components/ListaAvances.astro';
+import { campo, type Idioma } from '../../../lib/i18n';
+import { rutasIdioma } from '../../../lib/rutas';
+
+export const getStaticPaths = rutasIdioma;
+const lang = Astro.params.lang as Idioma;
+const datos = (await getEntry('paginas', 'avances'))!.data;
+const avances = (await getCollection('avances', (a) => !a.data.borrador)).sort((a, b) => b.data.fecha.valueOf() - a.data.fecha.valueOf());
+---
+
+<Base lang={lang} titulo={campo(datos, 'titulo', lang)} descripcion={campo(datos, 'bajada', lang)} actual="avances">
+  <Encabezado titulo={campo(datos, 'titulo', lang)} bajada={campo(datos, 'bajada', lang)} />
+  <section class="envoltura" style="padding-bottom: clamp(56px, 8vw, 96px)">
+    <ListaAvances lang={lang} avances={avances} />
+  </section>
+</Base>

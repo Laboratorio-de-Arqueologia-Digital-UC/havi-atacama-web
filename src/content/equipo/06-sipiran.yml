@@ -1,0 +1,9 @@
+nombre: Iván Sipiran
+orden: 6
+grupo: investigacion
+rol_es: Co-investigador
+rol_en: Co-investigator
+institucion: Universidad de Chile / CENIA
+foto: ../../assets/media/eq_sipiran.png
+bio_es: Iván Sipiran es profesor asistente del Departamento de Ciencias de la Computación (DCC) de la Universidad de Chile e investigador principal del CENIA, donde codirige la línea de investigación en Aprendizaje Profundo para Visión y Lenguaje. Su investigación abarca visión por computador, análisis de formas 3D, aprendizaje profundo geométrico y aprendizaje autosupervisado, con especial atención a la detección de simetrías y a la aplicación de la IA al patrimonio cultural. Dirige el laboratorio ShapeVision, donde supervisa a estudiantes de pregrado y posgrado que trabajan en la intersección entre geometría, aprendizaje y comprensión 3D. Su trabajo reciente explora la detección autosupervisada de simetrías 3D y el análisis de la simetría en modelos generativos, junto con proyectos colaborativos sobre patrimonio arqueológico andino y monitoreo ambiental basado en IA.
+bio_en: Ivan Sipiran is an Assistant Professor in the Department of Computer Science (DCC) at Universidad de Chile and a Principal Investigator at CENIA (Centro Nacional de Inteligencia Artificial), where he co-leads the research line on Deep Learning for Vision and Language. His research spans computer vision, 3D shape analysis, geometric deep learning, and self-supervised learning, with a particular focus on symmetry detection and the application of AI to cultural heritage. He leads the ShapeVision lab, where he supervises graduate and undergraduate students working at the intersection of geometry, learning, and 3D understanding. His recent work explores self-supervised 3D symmetry detection and the analysis of symmetry in generative models, alongside collaborative projects on Andean archaeological heritage and AI-based environmental monitoring.

@@ -1,0 +1,51 @@
+titulo_es: Metodología
+titulo_en: Methodology
+bajada_es: La IA mide parecidos; la arqueología decide cuáles importan. Ambas partes se corrigen en ciclos.
+bajada_en: AI measures similarity; archaeology decides which similarities matter. Each corrects the other in cycles.
+cuerpo_es: |
+  ## Corpus anotado
+
+  Imágenes de proyectos anteriores, sin nuevas capturas: fotografía de museo, ortomosaicos de dron y documentación de terreno. Esa heterogeneidad es la realidad de los archivos arqueológicos y forma parte del desafío.
+
+  ## Modelo de similitud entre soportes
+
+  Un modelo contrastivo parte de una red preentrenada (DINOv2 o CLIP) y aprende de pares de motivos: los que comparten tipo en soportes distintos se acercan, y los que solo comparten la categoría amplia se separan. Un ciclo de aprendizaje activo dirige la anotación hacia los casos donde el modelo duda.
+
+  ## Interpretabilidad evaluada con arqueólogos
+
+  Un puntaje de similitud no basta: hay que entender qué considera parecido el modelo. El proyecto pone a prueba distintos métodos de explicación en sesiones estructuradas con arqueólogas y arqueólogos.
+
+  ## Análisis espacial
+
+  La ubicación no entra al modelo, para que la similitud visual no dependa de la cercanía. Después se superponen los resultados en el mapa para ver dónde se concentran los motivos parecidos y generar nuevas hipótesis.
+
+  ## Primeros resultados
+
+  En octubre de 2026 se hicieron las primeras pruebas de detección de motivos sobre el corpus cerámico. El modelo que mejor recorta los motivos acierta en cerca de ocho de cada diez casos; los que solo los ubican todavía pierden muchos motivos pequeños.
+cuerpo_en: |
+  ## Annotated corpus
+
+  Imagery from earlier projects, with no new captures: museum photography, drone orthomosaics and field documentation. That heterogeneity is the reality of archaeological archives and part of the challenge.
+
+  ## Cross-media similarity model
+
+  A contrastive model starts from a pretrained backbone (DINOv2 or CLIP) and learns from pairs of motifs: those that share a type across different media are pulled together, while those that only share a broad category are pushed apart. An active learning loop directs annotation towards the cases where the model is most uncertain.
+
+  ## Interpretability evaluated with archaeologists
+
+  A similarity score is not enough: archaeologists must understand what the model considers similar. The project tests several explanation methods in structured sessions with archaeologists.
+
+  ## Spatial analysis
+
+  Location is not fed to the model, so that visual similarity stays independent of proximity. Results are then overlaid on the map to see where similar motifs cluster and to generate new hypotheses.
+
+  ## First results
+
+  In October 2026 the first motif detection tests were run on the ceramic corpus. The model that best outlines motifs is right in about eight out of ten cases; those that only locate them still miss many small motifs.
+figuras:
+- imagen: ../../assets/media/deteccion_ceramica.jpg
+  alt_es: Motivos de una vasija anotados a mano, a la izquierda, y detectados por el modelo, a la derecha
+  alt_en: Motifs on a vessel annotated by hand, on the left, and detected by the model, on the right
+  pie_es: Anotación manual (izquierda) y detecciones del modelo (derecha) en una vasija.
+  pie_en: Manual annotation (left) and model detections (right) on a vessel.
+  credito: Equipo HAVI Atacama

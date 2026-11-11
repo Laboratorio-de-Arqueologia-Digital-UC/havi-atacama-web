@@ -1,0 +1,122 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import Encabezado from '../../components/Encabezado.astro';
+import { campo, t, type Idioma } from '../../lib/i18n';
+import { md } from '../../lib/markdown';
+import { rutasIdioma } from '../../lib/rutas';
+
+export const getStaticPaths = rutasIdioma;
+const lang = Astro.params.lang as Idioma;
+const datos = (await getEntry('paginas', 'equipo'))!.data;
+const personas = (await getCollection('equipo')).sort((a, b) => a.data.orden - b.data.orden);
+const grupos = [
+  { clave: 'investigacion', personas: personas.filter((p) => p.data.grupo === 'investigacion') },
+  { clave: 'gestion', personas: personas.filter((p) => p.data.grupo === 'gestion') },
+] as const;
+---
+
+<Base lang={lang} titulo={campo(datos, 'titulo', lang)} descripcion={campo(datos, 'bajada', lang)} actual="equipo">
+  <Encabezado titulo={campo(datos, 'titulo', lang)} bajada={campo(datos, 'bajada', lang)} />
+  {
+    grupos.map((g) => (
+      <section class:list={['envoltura', 'grupo', g.clave]} aria-labelledby={`g-${g.clave}`}>
+        <h2 id={`g-${g.clave}`}>{t(lang, g.clave)}</h2>
+        <ul role="list">
+          {g.personas.map((p) => {
+            const bio = md(campo(p.data, 'bio', lang));
+            return (
+              <li class="persona">
+                {p.data.foto && <Image src={p.data.foto} alt="" width={g.clave === 'investigacion' ? 128 : 88} densities={[1, 2]} format="webp" class="foto" />}
+                <div>
+                  <h3>{p.data.nombre}</h3>
+                  <p class="rol sans">
+                    {campo(p.data, 'rol', lang)}
+                    <br />
+                    <span class="secundario">{p.data.institucion}</span>
+                  </p>
+                  {bio && (
+                    <details class="bio">
+                      <summary class="sans">{t(lang, 'leerMas')}</summary>
+                      <div class="prosa" set:html={bio} />
+                    </details>
+                  )}
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+    ))
+  }
+</Base>
+
+<style>
+  .grupo {
+    padding-bottom: clamp(56px, 7vw, 88px);
+  }
+  .grupo h2 {
+    font-size: 1.75rem;
+    border-top: 2px solid var(--hollin);
+    padding-top: 20px;
+    margin-bottom: 36px;
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 40px 56px;
+  }
+  .gestion ul {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 32px;
+  }
+  .persona {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+  }
+  .gestion .persona {
+    flex-direction: column;
+    gap: 14px;
+  }
+  .foto {
+    border-radius: 50%;
+    flex: 0 0 auto;
+    background: var(--roca-2);
+  }
+  h3 {
+    font-size: 1.3rem;
+  }
+  .rol {
+    margin: 6px 0 0;
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+  .bio summary {
+    cursor: pointer;
+    color: var(--azul);
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-top: 10px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+  .bio .prosa {
+    font-size: 1rem;
+    margin-top: 4px;
+  }
+  @media (max-width: 900px) {
+    ul,
+    .gestion ul {
+      grid-template-columns: 1fr;
+    }
+    .gestion ul {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

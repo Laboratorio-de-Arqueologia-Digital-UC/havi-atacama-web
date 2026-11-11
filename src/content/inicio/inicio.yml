@@ -1,0 +1,55 @@
+titulo_es: Leer las imágenes del desierto
+titulo_en: Reading the images of the desert
+bajada_es: Arqueología e inteligencia artificial para comparar los motivos de la cerámica, los geoglifos y el arte rupestre del desierto de Atacama, entre los años 1000 y 1400.
+bajada_en: Archaeology and artificial intelligence to compare the motifs of ceramics, geoglyphs and rock art in the Atacama Desert, between AD 1000 and 1400.
+descripcion_es: |
+  Este proyecto reúne arqueología e inteligencia artificial para estudiar tradiciones visuales compartidas entre la cerámica, los geoglifos y el arte rupestre del desierto de Atacama, en Chile.
+
+  El equipo construirá una base de conocimiento y un marco de análisis visual para comparar motivos entre soportes muy distintos. Con él generará nueva evidencia sobre redes de intercambio e interacción social prehispánicas, y hará avanzar métodos de IA interpretables, validados con datos reales y heterogéneos.
+descripcion_en: |
+  This project brings archaeology and AI together to study shared visual traditions across ceramics, geoglyphs, and rock art in Chile’s Atacama Desert.
+
+  The team will build a knowledge base and visual analysis framework designed to compare motifs across these heterogeneous media. Through this framework, the team will generate new evidence on prehispanic exchange networks and social interaction patterns while advancing interpretable AI methods validated on heterogeneous, real-world data.
+realce_natural: ../../assets/media/rupestre_natural.jpg
+realce_dstretch: ../../assets/media/rupestre_dstretch.jpg
+realce_alt_es: Panel de arte rupestre con camélidos pintados, en fotografía natural y realzado con DStretch
+realce_alt_en: Rock art panel with painted camelids, as a natural photograph and enhanced with DStretch
+realce_credito: Adrián Oyaneder (UTA)
+soportes:
+- nombre_es: Arte rupestre
+  nombre_en: Rock art
+  texto_es: Figuras circulares pintadas.
+  texto_en: Painted circular figures.
+  imagen: ../../assets/media/rupestre_circulos.jpg
+  alt_es: Figuras circulares y una línea ondulada pintadas en rojo sobre roca
+  alt_en: Circular figures and a wavy line painted in red on rock
+  credito: Adrián Oyaneder (UTA)
+- nombre_es: Cerámica
+  nombre_en: Ceramics
+  texto_es: Pieza 833_D con motivos anotados.
+  texto_en: Vessel 833_D with annotated motifs.
+  imagen: ../../assets/media/ceramica_anotada.jpg
+  alt_es: Vasija cerámica con motivos geométricos y una figura antropomorfa anotados
+  alt_en: Ceramic vessel with annotated geometric motifs and an anthropomorphic figure
+  credito: Equipo HAVI Atacama
+- nombre_es: Geoglifo
+  nombre_en: Geoglyph
+  texto_es: Lluta-111, vista aérea.
+  texto_en: Lluta-111, aerial view.
+  imagen: ../../assets/media/geoglifo_lluta111.jpg
+  alt_es: Vista aérea de figuras antropomorfas trazadas con piedras en una ladera
+  alt_en: Aerial view of anthropomorphic figures laid out with stones on a hillside
+  credito: Crédito por confirmar
+pasos:
+- titulo_es: Marcamos las figuras
+  titulo_en: We mark the figures
+  texto_es: Fotografiamos las piezas y señalamos cada motivo con un vocabulario común.
+  texto_en: We photograph each piece and label every motif with a shared vocabulary.
+- titulo_es: La IA busca parecidos
+  titulo_en: AI looks for similarities
+  texto_es: Las imágenes que se parecen quedan cerca, aunque estén en soportes distintos.
+  texto_en: Images that look alike end up close together, even across different media.
+- titulo_es: Los arqueólogos interpretan
+  titulo_en: Archaeologists interpret
+  texto_es: Revisan, corrigen y explican qué significan esos parecidos. Cada revisión le enseña al modelo qué importa.
+  texto_en: They review, correct and explain what those similarities mean. Each review teaches the model what matters.

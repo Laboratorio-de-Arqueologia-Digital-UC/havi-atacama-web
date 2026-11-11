@@ -1,0 +1,23 @@
+{
+  "name": "havi-atacama-web",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "build:preview": "astro build && node scripts/relativize.mjs dist preview"
+  },
+  "dependencies": {
+    "@fontsource-variable/libre-franklin": "^5.3.0",
+    "@fontsource-variable/literata": "^5.3.0",
+    "astro": "^7.4.10",
+    "marked": "^18.2.0",
+    "sharp": "^0.35.5"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

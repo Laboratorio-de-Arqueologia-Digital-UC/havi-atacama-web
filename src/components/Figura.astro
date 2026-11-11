@@ -1,0 +1,47 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  etiqueta?: string;
+  texto?: string;
+  credito?: string;
+  proporcion?: string; // p. ej. "4/3"
+  posicion?: string; // object-position
+  anchos?: string; // atributo sizes
+  clase?: string;
+  eager?: boolean;
+}
+const { src, alt, etiqueta, texto, credito, proporcion, posicion = 'center', anchos = '(max-width: 900px) 100vw, 50vw', clase, eager } = Astro.props;
+---
+
+<figure class:list={['figura', clase]}>
+  <Image
+    src={src}
+    alt={alt}
+    widths={[480, 800, 1200, 1600].filter((w) => w <= src.width)}
+    sizes={anchos}
+    format="webp"
+    loading={eager ? 'eager' : 'lazy'}
+    style={`aspect-ratio:${proporcion ?? `${src.width}/${src.height}`};object-position:${posicion}`}
+  />
+  {
+    (etiqueta || texto || credito) && (
+      <figcaption class="pie">
+        {etiqueta && <strong>{etiqueta}.</strong>} {texto} {credito && <span class="secundario">{credito}</span>}
+      </figcaption>
+    )
+  }
+</figure>
+
+<style>
+  .figura {
+    margin: 0;
+  }
+  .figura :global(img) {
+    width: 100%;
+    object-fit: cover;
+    background: var(--roca-2);
+  }
+</style>

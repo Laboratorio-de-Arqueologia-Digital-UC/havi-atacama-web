@@ -1,0 +1,488 @@
+# Configuración de Pages CMS (https://pagescms.org): define los formularios que ve el equipo.
+media:
+- name: imagenes
+  label: Imágenes
+  input: src/assets/media
+  output: ../../assets/media
+  rename: safe
+  extensions:
+  - jpg
+  - jpeg
+  - png
+  - webp
+settings:
+  content:
+    merge: true
+content:
+- name: avances
+  label: Avances (noticias)
+  type: collection
+  path: src/content/avances
+  format: yaml
+  filename: '{year}-{month}-{day}-{primary}.yml'
+  view:
+    primary: titulo_es
+    fields:
+    - titulo_es
+    - fecha
+    sort:
+    - fecha
+  fields:
+  - name: titulo_es
+    label: Título (español)
+    type: string
+    required: true
+  - name: titulo_en
+    label: Título (inglés)
+    type: string
+    required: true
+  - name: fecha
+    label: Fecha
+    type: date
+    required: true
+  - name: resumen_es
+    label: Resumen (una o dos frases) (español)
+    type: text
+    required: true
+  - name: resumen_en
+    label: Resumen (una o dos frases) (inglés)
+    type: text
+    required: true
+  - name: cuerpo_es
+    label: Texto completo (español)
+    type: rich-text
+    description: Puedes usar negritas, enlaces, listas y subtítulos.
+    options:
+      format: markdown
+  - name: cuerpo_en
+    label: Texto completo (inglés)
+    type: rich-text
+    options:
+      format: markdown
+  - name: imagen
+    label: Imagen principal
+    type: image
+    options:
+      media: imagenes
+  - name: imagen_alt_es
+    label: Descripción de la imagen para lectores de pantalla (español)
+    type: string
+  - name: imagen_alt_en
+    label: Descripción de la imagen para lectores de pantalla (inglés)
+    type: string
+  - name: credito
+    label: Crédito de la imagen
+    type: string
+  - &id001
+    name: incrustaciones
+    label: Mapas y modelos 3D incrustados
+    type: object
+    list: true
+    description: Pega el enlace público de un mapa, StoryMap o dashboard de ArcGIS Online, o de un modelo de Sketchfab. Revisa antes que no muestre ubicaciones exactas de sitios sensibles.
+    fields:
+    - name: tipo
+      label: Tipo
+      type: select
+      required: true
+      options:
+        values:
+        - value: arcgis
+          label: ArcGIS Online
+        - value: sketchfab
+          label: Sketchfab
+    - name: url
+      label: Enlace público (https)
+      type: string
+      required: true
+      description: Debe empezar con https:// y ser de arcgis.com o sketchfab.com
+    - name: titulo_es
+      label: Título (español)
+      type: string
+      required: true
+    - name: titulo_en
+      label: Título (inglés)
+      type: string
+      required: true
+  - name: borrador
+    label: Borrador (no publicar todavía)
+    type: boolean
+- name: equipo
+  label: Equipo
+  type: collection
+  path: src/content/equipo
+  format: yaml
+  filename: '{primary}.yml'
+  view:
+    primary: nombre
+    fields:
+    - nombre
+    - grupo
+    - orden
+    sort:
+    - orden
+  fields:
+  - name: nombre
+    label: Nombre
+    type: string
+    required: true
+  - name: orden
+    label: Orden en la lista
+    type: number
+    required: true
+    description: 1 aparece primero
+  - name: grupo
+    label: Grupo
+    type: select
+    required: true
+    options:
+      values:
+      - value: investigacion
+        label: Investigación
+      - value: gestion
+        label: Gestión y apoyo
+  - name: rol_es
+    label: Rol (español)
+    type: string
+    required: true
+  - name: rol_en
+    label: Rol (inglés)
+    type: string
+    required: true
+  - name: institucion
+    label: Institución
+    type: string
+  - name: foto
+    label: Foto cuadrada (1:1)
+    type: image
+    options:
+      media: imagenes
+  - name: bio_es
+    label: Biografía (español)
+    type: rich-text
+    description: Puedes usar negritas, enlaces, listas y subtítulos.
+    options:
+      format: markdown
+  - name: bio_en
+    label: Biografía (inglés)
+    type: rich-text
+    options:
+      format: markdown
+- name: hitos
+  label: Hitos
+  type: collection
+  path: src/content/hitos
+  format: yaml
+  filename: '{primary}.yml'
+  view:
+    primary: titulo_es
+    fields:
+    - fecha
+    - titulo_es
+    - estado
+    sort:
+    - fecha
+  fields:
+  - name: fecha
+    label: Mes (AAAA-MM)
+    type: string
+    required: true
+    description: Por ejemplo 2027-03
+    pattern:
+      regex: ^\d{4}-\d{2}$
+      message: Usa el formato AAAA-MM
+  - name: titulo_es
+    label: Hito (español)
+    type: string
+    required: true
+  - name: titulo_en
+    label: Hito (inglés)
+    type: string
+    required: true
+  - name: estado
+    label: Estado
+    type: select
+    required: true
+    options:
+      values:
+      - value: pendiente
+        label: Pendiente
+      - value: en-curso
+        label: En curso
+      - value: cumplido
+        label: Cumplido
+- name: recursos
+  label: Recursos (publicaciones, datos, código)
+  type: collection
+  path: src/content/recursos
+  format: yaml
+  filename: '{primary}.yml'
+  view:
+    primary: titulo_es
+    fields:
+    - titulo_es
+    - tipo
+    - fecha
+    sort:
+    - fecha
+  fields:
+  - name: titulo_es
+    label: Título (español)
+    type: string
+    required: true
+  - name: titulo_en
+    label: Título (inglés)
+    type: string
+    required: true
+  - name: tipo
+    label: Tipo
+    type: select
+    required: true
+    options:
+      values:
+      - value: publicacion
+        label: Publicación
+      - value: dataset
+        label: Datos
+      - value: codigo
+        label: Código
+      - value: taller
+        label: Taller
+      - value: presentacion
+        label: Presentación
+  - name: fecha
+    label: Fecha
+    type: date
+    required: true
+  - name: enlace
+    label: Enlace (DOI, GitHub, PDF)
+    type: string
+  - name: descripcion_es
+    label: Descripción (español)
+    type: text
+  - name: descripcion_en
+    label: Descripción (inglés)
+    type: text
+- name: paginas
+  label: Páginas
+  type: collection
+  path: src/content/paginas
+  format: yaml
+  operations:
+    create: false
+    delete: false
+    rename: false
+  view:
+    primary: titulo_es
+    fields:
+    - titulo_es
+  fields:
+  - name: titulo_es
+    label: Título (español)
+    type: string
+    required: true
+  - name: titulo_en
+    label: Título (inglés)
+    type: string
+    required: true
+  - name: bajada_es
+    label: Bajada (español)
+    type: text
+  - name: bajada_en
+    label: Bajada (inglés)
+    type: text
+  - name: cuerpo_es
+    label: Texto (español)
+    type: rich-text
+    description: Puedes usar negritas, enlaces, listas y subtítulos.
+    options:
+      format: markdown
+  - name: cuerpo_en
+    label: Texto (inglés)
+    type: rich-text
+    options:
+      format: markdown
+  - name: figuras
+    label: Imágenes de la página
+    type: object
+    list: true
+    fields:
+    - name: imagen
+      label: Imagen
+      type: image
+      required: true
+      options:
+        media: imagenes
+    - name: alt_es
+      label: Descripción para lectores de pantalla (español)
+      type: string
+      required: true
+    - name: alt_en
+      label: Descripción para lectores de pantalla (inglés)
+      type: string
+      required: true
+    - name: pie_es
+      label: Pie de foto (español)
+      type: string
+    - name: pie_en
+      label: Pie de foto (inglés)
+      type: string
+    - name: credito
+      label: Crédito de la imagen
+      type: string
+  - *id001
+- name: inicio
+  label: Portada
+  type: file
+  path: src/content/inicio/inicio.yml
+  format: yaml
+  fields:
+  - name: titulo_es
+    label: Título principal (español)
+    type: string
+    required: true
+  - name: titulo_en
+    label: Título principal (inglés)
+    type: string
+    required: true
+  - name: bajada_es
+    label: Bajada (español)
+    type: text
+    required: true
+  - name: bajada_en
+    label: Bajada (inglés)
+    type: text
+    required: true
+  - name: descripcion_es
+    label: Descripción del proyecto (español)
+    type: text
+    required: true
+  - name: descripcion_en
+    label: Descripción del proyecto (inglés)
+    type: text
+    required: true
+  - name: realce_natural
+    label: 'Realce: foto natural'
+    type: image
+    required: true
+    description: Debe tener el mismo encuadre que la foto realzada
+    options:
+      media: imagenes
+  - name: realce_dstretch
+    label: 'Realce: foto con DStretch'
+    type: image
+    required: true
+    options:
+      media: imagenes
+  - name: realce_alt_es
+    label: Descripción del realce para lectores de pantalla (español)
+    type: string
+    required: true
+  - name: realce_alt_en
+    label: Descripción del realce para lectores de pantalla (inglés)
+    type: string
+    required: true
+  - name: realce_credito
+    label: Crédito del realce
+    type: string
+    required: true
+  - name: soportes
+    label: Los tres soportes
+    type: object
+    list:
+      min: 3
+      max: 3
+    fields:
+    - name: nombre_es
+      label: Soporte (español)
+      type: string
+      required: true
+    - name: nombre_en
+      label: Soporte (inglés)
+      type: string
+      required: true
+    - name: texto_es
+      label: Texto (español)
+      type: text
+      required: true
+    - name: texto_en
+      label: Texto (inglés)
+      type: text
+      required: true
+    - name: imagen
+      label: Imagen
+      type: image
+      required: true
+      options:
+        media: imagenes
+    - name: alt_es
+      label: Descripción para lectores de pantalla (español)
+      type: string
+      required: true
+    - name: alt_en
+      label: Descripción para lectores de pantalla (inglés)
+      type: string
+      required: true
+    - name: credito
+      label: Crédito
+      type: string
+      required: true
+  - name: pasos
+    label: Cómo trabajamos
+    type: object
+    list: true
+    fields:
+    - name: titulo_es
+      label: Paso (español)
+      type: string
+      required: true
+    - name: titulo_en
+      label: Paso (inglés)
+      type: string
+      required: true
+    - name: texto_es
+      label: Texto (español)
+      type: text
+      required: true
+    - name: texto_en
+      label: Texto (inglés)
+      type: text
+      required: true
+- name: sitio
+  label: Datos del sitio (contacto y créditos)
+  type: file
+  path: src/content/sitio/sitio.yml
+  format: yaml
+  fields:
+  - name: nombre
+    label: Nombre del sitio
+    type: string
+    required: true
+  - name: correo
+    label: Correo de contacto
+    type: string
+    required: true
+  - name: financiamiento_es
+    label: Frase de financiamiento (español)
+    type: text
+    required: true
+  - name: financiamiento_en
+    label: Frase de financiamiento (inglés)
+    type: text
+    required: true
+  - name: instituciones
+    label: Instituciones (logos del pie)
+    type: object
+    list: true
+    fields:
+    - name: nombre
+      label: Nombre
+      type: string
+      required: true
+    - name: url
+      label: Sitio web
+      type: string
+      required: true
+    - name: logo
+      label: Archivo del logo en src/assets/logos
+      type: string
+      required: true

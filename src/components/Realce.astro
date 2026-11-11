@@ -1,0 +1,109 @@
+---
+import { getImage } from 'astro:assets';
+import { t, type Idioma } from '../lib/i18n';
+
+interface Props {
+  lang: Idioma;
+  natural: ImageMetadata;
+  realzada: ImageMetadata;
+  alt: string;
+  credito: string;
+}
+const { lang, natural, realzada, alt, credito } = Astro.props;
+const anchos = [640, 1024, 1440, 1800];
+const optim = async (src: ImageMetadata) => {
+  const versiones = await Promise.all(
+    anchos.filter((w) => w <= src.width).map((w) => getImage({ src, width: w, format: 'webp' }))
+  );
+  return {
+    src: versiones.at(-1)!.src,
+    srcset: versiones.map((v) => `${v.src} ${v.attributes.width}w`).join(', '),
+  };
+};
+const a = await optim(natural);
+const b = await optim(realzada);
+const id = 'realce-' + Math.random().toString(36).slice(2, 8);
+---
+
+<figure class="realce" data-realce style="--pos: 55%">
+  <div class="marco">
+    <img src={a.src} srcset={a.srcset} sizes="100vw" alt={alt} width={natural.width} height={natural.height} />
+    <img
+      class="capa"
+      src={b.src}
+      srcset={b.srcset}
+      sizes="100vw"
+      alt=""
+      aria-hidden="true"
+      width={realzada.width}
+      height={realzada.height}
+      loading="eager"
+    />
+    <div class="linea" aria-hidden="true"></div>
+  </div>
+  <figcaption class="envoltura controles">
+    <label for={id}>{t(lang, 'realce')}</label>
+    <input id={id} type="range" min="0" max="100" value="55" />
+    <span class="secundario">{t(lang, 'realceAyuda')} {t(lang, 'imagen')}: {credito}</span>
+  </figcaption>
+</figure>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-realce]').forEach((fig) => {
+    const input = fig.querySelector('input');
+    input?.addEventListener('input', () => fig.style.setProperty('--pos', input.value + '%'));
+  });
+</script>
+
+<style>
+  .realce {
+    margin: 0;
+  }
+  .marco {
+    position: relative;
+    max-width: 1440px;
+    margin-inline: auto;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--hollin);
+  }
+  .marco img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .capa {
+    clip-path: inset(0 0 0 var(--pos));
+  }
+  .linea {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--pos);
+    width: 2px;
+    margin-left: -1px;
+    background: var(--blanco);
+    box-shadow: 0 0 0 1px rgb(36 25 26 / 0.35);
+  }
+  .controles {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 28px;
+    padding-top: 16px;
+    font-family: var(--sans);
+    font-size: 0.875rem;
+  }
+  label {
+    font-weight: 700;
+  }
+  input {
+    flex: 1 1 260px;
+    min-height: 44px;
+  }
+  .controles span {
+    flex: 1 1 260px;
+  }
+</style>

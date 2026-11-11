@@ -1,0 +1,17 @@
+titulo_es: Avanza la revisión de las colecciones
+titulo_en: Reviewing the collections
+fecha: 2026-11-10
+resumen_es: El equipo reúne en un inventario común los registros de cerámica, geoglifos y arte rupestre, y hace las primeras pruebas de detección de motivos en cerámica.
+resumen_en: The team is bringing ceramic, geoglyph and rock art records into a shared inventory and running the first motif detection tests on ceramics.
+cuerpo_es: |-
+  El primer hito del proyecto, entre octubre y diciembre, es tener los datos listos. El equipo acordó los campos de una planilla común y ya incorporó tres de los cinco corpus: geoglifos, arte rupestre y cerámica.
+
+  En paralelo, se hicieron las primeras pruebas para que un modelo encuentre y recorte los motivos pintados en las vasijas, y se prepara la primera muestra de imágenes para comparar motivos entre soportes.
+cuerpo_en: |-
+  The project's first milestone, between October and December, is to get the data ready. The team agreed on the fields of a shared inventory and has already added three of the five corpora: geoglyphs, rock art and ceramics.
+
+  In parallel, the first tests were run for a model to find and outline the motifs painted on vessels, and the first image sample is being prepared to compare motifs across media.
+imagen: ../../assets/media/lab_caja_luz.jpg
+imagen_alt_es: Una investigadora fotografía una vasija dentro de una caja de luz
+imagen_alt_en: A researcher photographs a vessel inside a light box
+credito: Equipo HAVI Atacama

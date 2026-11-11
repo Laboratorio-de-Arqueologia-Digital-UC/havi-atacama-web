@@ -1,0 +1,85 @@
+---
+import { Image } from 'astro:assets';
+import { campo, fecha, ruta, t, type Idioma } from '../lib/i18n';
+
+interface Props {
+  lang: Idioma;
+  avances: any[];
+}
+const { lang, avances } = Astro.props;
+---
+
+{
+  avances.length === 0 ? (
+    <p class="sans secundario">{t(lang, 'sinAvances')}</p>
+  ) : (
+    <ul class="avances" role="list">
+      {avances.map((a) => (
+        <li>
+          {a.data.imagen && (
+            <Image src={a.data.imagen} alt="" widths={[400, 700]} sizes="(max-width: 700px) 100vw, 320px" format="webp" class="miniatura" />
+          )}
+          <div>
+            <p class="sans secundario num fecha">
+              <time datetime={a.data.fecha.toISOString().slice(0, 10)}>{fecha(a.data.fecha, lang)}</time>
+            </p>
+            <h3>
+              <a href={ruta(lang, 'avances', a.id)}>{campo(a.data, 'titulo', lang)}</a>
+            </h3>
+            <p>{campo(a.data, 'resumen', lang)}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+<style>
+  .avances {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    display: grid;
+    grid-template-columns: 320px minmax(0, 1fr);
+    gap: 20px 40px;
+    padding-block: 32px;
+    border-top: 1px solid var(--linea);
+    align-items: start;
+  }
+  li:not(:has(.miniatura)) {
+    grid-template-columns: 1fr;
+  }
+  .miniatura {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+  }
+  .fecha {
+    margin: 0 0 6px;
+    font-size: 0.9rem;
+  }
+  h3 {
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+    margin-bottom: 10px;
+  }
+  h3 a {
+    color: var(--hollin);
+    text-decoration: none;
+  }
+  h3 a:hover {
+    color: var(--magenta);
+    text-decoration: underline;
+  }
+  li p:last-child {
+    margin: 0;
+    max-width: 62ch;
+  }
+  @media (max-width: 700px) {
+    li {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

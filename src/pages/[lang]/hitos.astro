@@ -1,0 +1,85 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Encabezado from '../../components/Encabezado.astro';
+import { campo, mes, t, type Idioma } from '../../lib/i18n';
+import { rutasIdioma } from '../../lib/rutas';
+
+export const getStaticPaths = rutasIdioma;
+const lang = Astro.params.lang as Idioma;
+const datos = (await getEntry('paginas', 'hitos'))!.data;
+const hitos = (await getCollection('hitos')).sort((a, b) => a.data.fecha.localeCompare(b.data.fecha));
+---
+
+<Base lang={lang} titulo={campo(datos, 'titulo', lang)} descripcion={campo(datos, 'bajada', lang)} actual="hitos">
+  <Encabezado titulo={campo(datos, 'titulo', lang)} bajada={campo(datos, 'bajada', lang)} />
+  <section class="envoltura seccion linea-tiempo">
+    <ol role="list">
+      {
+        hitos.map((h) => (
+          <li class={h.data.estado}>
+            <p class="fecha sans num">{mes(h.data.fecha, lang)}</p>
+            <div>
+              <p class="estado sans">{t(lang, h.data.estado)}</p>
+              <h2>{campo(h.data, 'titulo', lang)}</h2>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+</Base>
+
+<style>
+  .linea-tiempo {
+    padding-top: 0;
+  }
+  ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-width: 920px;
+  }
+  li {
+    display: grid;
+    grid-template-columns: 9rem minmax(0, 1fr);
+    gap: 8px 32px;
+    padding-block: 22px;
+    border-top: 1px solid var(--linea);
+    position: relative;
+  }
+  .fecha {
+    margin: 0;
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: capitalize;
+  }
+  .estado {
+    margin: 0 0 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--gris);
+  }
+  h2 {
+    font-size: 1.3rem;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+  }
+  .cumplido .estado {
+    color: var(--azul);
+  }
+  .en-curso .estado {
+    color: var(--magenta);
+  }
+  .en-curso {
+    border-top: 2px solid var(--magenta);
+  }
+  .pendiente h2 {
+    font-weight: 600;
+  }
+  @media (max-width: 600px) {
+    li {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

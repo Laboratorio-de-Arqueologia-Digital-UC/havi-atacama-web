@@ -1,0 +1,15 @@
+---
+import { getEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PaginaGenerica from '../../components/PaginaGenerica.astro';
+import { campo, type Idioma } from '../../lib/i18n';
+import { rutasIdioma } from '../../lib/rutas';
+
+export const getStaticPaths = rutasIdioma;
+const lang = Astro.params.lang as Idioma;
+const datos = (await getEntry('paginas', 'contacto'))!.data;
+---
+
+<Base lang={lang} titulo={campo(datos, 'titulo', lang)} descripcion={campo(datos, 'bajada', lang)} actual="contacto">
+  <PaginaGenerica lang={lang} datos={datos} />
+</Base>

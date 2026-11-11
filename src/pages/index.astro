@@ -1,0 +1,16 @@
+---
+const destino = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/es/`;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>HAVI Atacama · Motifs Across Media</title>
+    <meta http-equiv="refresh" content={`0; url=${destino}`} />
+    <link rel="canonical" href={destino} />
+  </head>
+  <body>
+    <p><a href={destino}>Ir al sitio en español</a> · <a href={destino.replace(/es\/$/, 'en/')}>Go to the English site</a></p>
+  </body>
+</html>

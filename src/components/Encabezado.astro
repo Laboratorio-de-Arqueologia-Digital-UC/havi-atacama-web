@@ -1,0 +1,30 @@
+---
+interface Props {
+  titulo: string;
+  bajada?: string;
+}
+const { titulo, bajada } = Astro.props;
+---
+
+<header class="encabezado envoltura">
+  <h1>{titulo}</h1>
+  {bajada && <p class="bajada">{bajada}</p>}
+</header>
+
+<style>
+  .encabezado {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: 24px 56px;
+    align-items: end;
+    padding-block: 40px 56px;
+  }
+  .bajada {
+    margin: 0;
+  }
+  @media (max-width: 900px) {
+    .encabezado {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,186 @@
+@import '@fontsource-variable/libre-franklin';
+@import '@fontsource-variable/literata';
+
+/* Dirección C · Realce
+   Colores medidos en las imágenes del proyecto: gris de roca claro de fondo,
+   hollín de la imagen realzada como tinta, magenta y azul del realce DStretch. */
+:root {
+  --roca: #ede8e5;
+  --roca-2: #e3dcd8;
+  --hollin: #24191a;
+  --gris: #5f5150;
+  --magenta: #932f52;
+  --azul: #32667f;
+  --blanco: #ffffff;
+  --linea: #cfc5c1;
+
+  --sans: 'Libre Franklin Variable', 'Libre Franklin', system-ui, sans-serif;
+  --serif: 'Literata Variable', 'Literata', Georgia, serif;
+
+  --ancho: 1280px;
+  --margen: clamp(20px, 4vw, 48px);
+  --medida: 64ch;
+
+  color-scheme: light;
+  accent-color: var(--magenta);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: 24px;
+}
+
+body {
+  margin: 0;
+  background: var(--roca);
+  color: var(--hollin);
+  font-family: var(--serif);
+  font-size: 1.125rem;
+  line-height: 1.6;
+  font-optical-sizing: auto;
+}
+
+::selection {
+  background: var(--magenta);
+  color: var(--blanco);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: var(--azul);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+a:hover {
+  color: var(--magenta);
+}
+
+:focus-visible {
+  outline: 2px solid var(--azul);
+  outline-offset: 3px;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--sans);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.04;
+  text-wrap: balance;
+  margin: 0;
+}
+h1 {
+  font-size: clamp(2.6rem, 6.5vw, 5.25rem);
+  letter-spacing: -0.035em;
+}
+h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+h3 {
+  font-size: 1.3rem;
+  letter-spacing: -0.01em;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+p {
+  margin: 0 0 1em;
+}
+
+.envoltura {
+  max-width: var(--ancho);
+  margin-inline: auto;
+  padding-inline: var(--margen);
+}
+
+.prosa {
+  max-width: var(--medida);
+}
+.prosa > :last-child {
+  margin-bottom: 0;
+}
+.prosa h2 {
+  font-size: 1.75rem;
+  margin: 1.6em 0 0.5em;
+}
+.prosa h3 {
+  margin: 1.4em 0 0.4em;
+}
+.prosa ul,
+.prosa ol {
+  padding-left: 1.2em;
+  margin: 0 0 1em;
+}
+.prosa li {
+  margin-bottom: 0.35em;
+}
+
+.sans {
+  font-family: var(--sans);
+}
+.secundario {
+  color: var(--gris);
+}
+.bajada {
+  font-size: 1.25rem;
+  line-height: 1.5;
+}
+.pie {
+  font-family: var(--sans);
+  font-size: 0.875rem;
+  line-height: 1.45;
+  margin-top: 12px;
+}
+.pie strong {
+  color: var(--magenta);
+}
+.num {
+  font-variant-numeric: tabular-nums;
+}
+
+.seccion {
+  padding-block: clamp(56px, 8vw, 96px);
+}
+.banda {
+  background: var(--roca-2);
+}
+
+.saltar {
+  position: absolute;
+  left: 12px;
+  top: -60px;
+  background: var(--hollin);
+  color: var(--blanco);
+  padding: 10px 14px;
+  font-family: var(--sans);
+  z-index: 10;
+}
+.saltar:focus {
+  top: 12px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* Barras de desplazamiento con la paleta del sitio */
+html {
+  scrollbar-color: var(--gris) var(--roca-2);
+}

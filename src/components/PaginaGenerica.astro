@@ -1,0 +1,57 @@
+---
+import Encabezado from './Encabezado.astro';
+import Figura from './Figura.astro';
+import Incrustacion from './Incrustacion.astro';
+import { campo, type Idioma } from '../lib/i18n';
+import { md } from '../lib/markdown';
+
+interface Props {
+  lang: Idioma;
+  datos: any;
+}
+const { lang, datos } = Astro.props;
+const cuerpo = md(campo(datos, 'cuerpo', lang));
+---
+
+<Encabezado titulo={campo(datos, 'titulo', lang)} bajada={campo(datos, 'bajada', lang)} />
+<div class="envoltura cuerpo-pagina">
+  {cuerpo && <div class="prosa" set:html={cuerpo} />}
+  {
+    datos.figuras?.length > 0 && (
+      <div class="figuras">
+        {datos.figuras.map((f: any) => (
+          <Figura src={f.imagen} alt={campo(f, 'alt', lang)} texto={campo(f, 'pie', lang)} credito={f.credito} anchos="(max-width: 900px) 100vw, 40vw" />
+        ))}
+      </div>
+    )
+  }
+</div>
+{
+  datos.incrustaciones?.length > 0 && (
+    <div class="envoltura">
+      {datos.incrustaciones.map((i: any) => (
+        <Incrustacion lang={lang} tipo={i.tipo} url={i.url} titulo={campo(i, 'titulo', lang)} />
+      ))}
+    </div>
+  )
+}
+<slot />
+
+<style>
+  .cuerpo-pagina {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: 48px 64px;
+    align-items: start;
+    padding-bottom: clamp(56px, 8vw, 96px);
+  }
+  .figuras {
+    display: grid;
+    gap: 40px;
+  }
+  @media (max-width: 900px) {
+    .cuerpo-pagina {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

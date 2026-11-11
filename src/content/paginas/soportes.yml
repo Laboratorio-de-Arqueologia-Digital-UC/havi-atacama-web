@@ -1,0 +1,53 @@
+titulo_es: Soportes y motivos
+titulo_en: Media and motifs
+bajada_es: Las mismas figuras aparecen en vasijas pintadas, en cerros y en rocas. El proyecto las compara con un vocabulario común.
+bajada_en: The same figures appear on painted vessels, on hillsides and on rocks. The project compares them using a shared vocabulary.
+cuerpo_es: |
+  ## Cerámica
+
+  Vasijas pintadas fotografiadas en museo y laboratorio. El proyecto trabaja con más de 800 piezas digitalizadas. Además de la forma del motivo, se registra su paleta de color.
+
+  ## Geoglifos
+
+  Figuras trazadas en los cerros, documentadas con ortomosaicos de dron y modelos de elevación. Se registra la técnica de construcción: despeje o acumulación de piedras.
+
+  ## Arte rupestre
+
+  Pinturas y grabados sobre roca, documentados en terreno durante décadas de investigación. Se registra el tipo de pigmento.
+
+  ## Un vocabulario común
+
+  Todas las anotaciones comparten una raíz: categoría amplia (animal, antropomorfo, geométrico), tipo (camélido, ave, espiral) y atributos visibles (de pie, echado). Bajo esa raíz, cada soporte conserva sus propios rasgos. La mayoría de los motivos se marca con cajas, y un subconjunto con contornos precisos, donde los límites importan: geoglifos erosionados, motivos cerámicos superpuestos y paneles rupestres con palimpsestos.
+
+  Los textiles quedan para una segunda etapa.
+cuerpo_en: |
+  ## Ceramics
+
+  Painted vessels photographed in museums and laboratories. The project works with more than 800 digitized pieces. Besides the shape of each motif, its colour palette is recorded.
+
+  ## Geoglyphs
+
+  Figures laid out on hillsides, documented with drone orthomosaics and elevation models. The construction technique is recorded: clearing or accumulation of stones.
+
+  ## Rock art
+
+  Paintings and engravings on rock, documented in the field over decades of research. The pigment type is recorded.
+
+  ## A shared vocabulary
+
+  All annotations share a common root: broad category (animal, anthropomorph, geometric), type (camelid, bird, spiral) and visible attributes (standing, recumbent). Below that root, each medium keeps its own features. Most motifs are marked with bounding boxes, and a curated subset with precise outlines where boundaries matter: eroded geoglyphs, overlapping ceramic motifs and palimpsest rock art panels.
+
+  Textiles will be added in a later phase.
+figuras:
+- imagen: ../../assets/media/lab_ceramica.jpg
+  alt_es: Vasijas pintadas sobre la mesa del laboratorio mientras una investigadora las mide
+  alt_en: Painted vessels on a laboratory table while a researcher measures them
+  pie_es: Registro de vasijas en laboratorio.
+  pie_en: Recording vessels in the laboratory.
+  credito: Equipo HAVI Atacama
+- imagen: ../../assets/media/lluta111_paneles.jpg
+  alt_es: 'Cuatro vistas del geoglifo Lluta-111: ortomosaico, modelo de elevación y dos sombreados'
+  alt_en: 'Four views of the Lluta-111 geoglyph: orthomosaic, elevation model and two hillshades'
+  pie_es: 'Geoglifo Lluta-111: ortomosaico, modelo de elevación y sombreados.'
+  pie_en: 'Lluta-111 geoglyph: orthomosaic, elevation model and hillshades.'
+  credito: Crédito por confirmar
