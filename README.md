@@ -52,12 +52,12 @@ npm run build      # compila en dist/
 Variables de entorno opcionales:
 
 - `BASE_PATH`: subcarpeta de publicación, por ejemplo `/havi-atacama-web/` en GitHub Pages. En el servidor de CENIA, con dominio propio, se deja vacía.
-- `SITE_URL`: dominio final, que por ahora es `https://havi-atacama.cenia.cl` (por confirmar).
+- `SITE_URL`: dominio final. El nombre definitivo del dominio será **motifs-atacama**; se implementará más adelante. Mientras tanto, el valor por defecto en `astro.config.mjs` es provisorio y debe actualizarse cuando el dominio exista.
 
 ## Publicación
 
 Cada cambio en la rama `main` ejecuta el flujo `.github/workflows/build.yml`. Este compila el sitio y deja la carpeta lista como un artefacto descargable llamado `sitio-havi-atacama`. Para el servidor de CENIA basta con copiar el contenido de ese artefacto, es decir `dist/`, a la raíz del sitio. Cuando TI de CENIA entregue el acceso, se puede agregar un paso de copia automática (rsync o SFTP) al mismo flujo.
 
-Mientras se define el subdominio, el mismo flujo publica un prototipo en GitHub Pages, en https://laboratorio-de-arqueologia-digital-uc.github.io/havi-atacama-web/. Esa versión se compila con `BASE_PATH=/havi-atacama-web/` y `NO_INDEXAR=true`, por lo que los buscadores no la indexan; la versión para CENIA no lleva esa marca. Para que funcione, en el repositorio debe estar activado Settings → Pages → Source: GitHub Actions. Cuando el sitio pase a CENIA basta con desactivar Pages ahí y borrar el trabajo `prototipo` del flujo.
+Mientras se implementa el dominio motifs-atacama, el mismo flujo publica un prototipo en GitHub Pages, en https://laboratorio-de-arqueologia-digital-uc.github.io/havi-atacama-web/. Esa versión se compila con `BASE_PATH=/havi-atacama-web/` y `NO_INDEXAR=true`, por lo que los buscadores no la indexan; la versión para CENIA no lleva esa marca. Para que funcione, en el repositorio debe estar activado Settings → Pages → Source: GitHub Actions. Cuando el sitio pase a CENIA basta con desactivar Pages ahí y borrar el trabajo `prototipo` del flujo.
 
 `npm run build:preview` genera una versión con rutas relativas en `preview/`, que se puede abrir sin servidor y sirve para compartir vistas previas.

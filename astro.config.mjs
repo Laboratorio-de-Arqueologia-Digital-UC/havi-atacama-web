@@ -3,6 +3,7 @@ import { defineConfig } from 'astro/config';
 
 // BASE_PATH permite publicar el sitio en una subcarpeta (p. ej. GitHub Pages: /havi-atacama-web).
 // En el servidor de CENIA, con dominio propio, se deja vacío.
+// Dominio definitivo: motifs-atacama (por implementar). Al activarlo, actualizar SITE_URL.
 const base = process.env.BASE_PATH || '/';
 
 export default defineConfig({
